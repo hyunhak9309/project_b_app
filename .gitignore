@@ -32,9 +32,6 @@ migrate_working_dir/
 .pub/
 /build/
 
-/macos
-/data/db
-
 # Symbolication related
 app.*.symbols
 
