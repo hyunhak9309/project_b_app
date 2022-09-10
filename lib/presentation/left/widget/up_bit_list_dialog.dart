@@ -15,8 +15,8 @@ class UpBitListDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var state =
-        0.obs; // 0: 일거래량, 1: 전일대비 증가율, 2: 현재가, 3:고가 4:저가, 5: 변화액, 6: 누적거래대금
+    var state = 0
+        .obs; // 0: 일거래량, 1: 전일대비 증가율, 2: 현재가, 3:고가 4:저가, 5: 변화액, 6: 누적거래대금 7: 마켓 이름 순
     var rankingFlex = 1;
     var coinFlex = 2;
     var tradePriceFlex = 2;
@@ -44,7 +44,27 @@ class UpBitListDialog extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Expanded(flex: rankingFlex, child: BText('ranking'.tr, 16)),
-                    Expanded(flex: coinFlex, child: BText('coin'.tr, 16)),
+                    Expanded(
+                        flex: coinFlex,
+                        child: BInkWell(
+                            onTap: () {
+                              state.value = 7;
+                            },
+                            child: Center(
+                              child: Obx(
+                                () => Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      BText('coin'.tr, 16),
+                                      if (state.value == 7)
+                                        const BText(
+                                          ' *',
+                                          18,
+                                          color: Colors.yellow,
+                                        ),
+                                    ]),
+                              ),
+                            ))),
                     Expanded(
                         flex: tradePriceFlex,
                         child: BInkWell(
@@ -231,12 +251,19 @@ class UpBitListDialog extends StatelessWidget {
                                                     .value
                                                     .signedChangePrice
                                                     .length
-                                                : LeftController
-                                                    .to
-                                                    .upBitData
-                                                    .value
-                                                    .accTradePrice24h
-                                                    .length,
+                                                : state.value == 6
+                                                    ? LeftController
+                                                        .to
+                                                        .upBitData
+                                                        .value
+                                                        .accTradePrice24h
+                                                        .length
+                                                    : LeftController
+                                                        .to
+                                                        .upBitData
+                                                        .value
+                                                        .market
+                                                        .length,
                         itemBuilder: (context, index) {
                           return Container(
                             padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
@@ -247,69 +274,60 @@ class UpBitListDialog extends StatelessWidget {
                               Expanded(
                                   flex: coinFlex,
                                   child: BText(
-                                      LeftController
-                                          .to
-                                          .marketCode[LeftController
-                                              .to.marketCode
-                                              .indexWhere((element) =>
-                                                  element.market ==
-                                                  (state.value == 0
+                                      (state.value == 0
+                                          ? LeftController.to.upBitData.value
+                                              .accTradeVolume24h[index].market
+                                          : state.value == 1
+                                              ? LeftController
+                                                  .to
+                                                  .upBitData
+                                                  .value
+                                                  .signedChangeRate[index]
+                                                  .market
+                                              : state.value == 2
+                                                  ? LeftController
+                                                      .to
+                                                      .upBitData
+                                                      .value
+                                                      .tradePrice[index]
+                                                      .market
+                                                  : state.value == 3
                                                       ? LeftController
                                                           .to
                                                           .upBitData
                                                           .value
-                                                          .accTradeVolume24h[
-                                                              index]
+                                                          .highPrice[index]
                                                           .market
-                                                      : state.value == 1
+                                                      : state.value == 4
                                                           ? LeftController
                                                               .to
                                                               .upBitData
                                                               .value
-                                                              .signedChangeRate[
-                                                                  index]
+                                                              .lowPrice[index]
                                                               .market
-                                                          : state.value == 2
+                                                          : state.value == 5
                                                               ? LeftController
                                                                   .to
                                                                   .upBitData
                                                                   .value
-                                                                  .tradePrice[
+                                                                  .signedChangePrice[
                                                                       index]
                                                                   .market
-                                                              : state.value == 3
+                                                              : state.value == 6
                                                                   ? LeftController
                                                                       .to
                                                                       .upBitData
                                                                       .value
-                                                                      .highPrice[
+                                                                      .accTradePrice24h[
                                                                           index]
                                                                       .market
-                                                                  : state.value ==
-                                                                          4
-                                                                      ? LeftController
-                                                                          .to
-                                                                          .upBitData
-                                                                          .value
-                                                                          .lowPrice[
-                                                                              index]
-                                                                          .market
-                                                                      : state.value ==
-                                                                              5
-                                                                          ? LeftController
-                                                                              .to
-                                                                              .upBitData
-                                                                              .value
-                                                                              .signedChangePrice[
-                                                                                  index]
-                                                                              .market
-                                                                          : LeftController
-                                                                              .to
-                                                                              .upBitData
-                                                                              .value
-                                                                              .accTradePrice24h[index]
-                                                                              .market))]
-                                          .koreanName,
+                                                                  : LeftController
+                                                                      .to
+                                                                      .upBitData
+                                                                      .value
+                                                                      .market[
+                                                                          index]
+                                                                      .market),
                                       14)),
                               Expanded(
                                   flex: tradePriceFlex,
@@ -363,14 +381,23 @@ class UpBitListDialog extends StatelessWidget {
                                                                       index]
                                                                   .tradePrice
                                                                   .toString()
-                                                              : LeftController
-                                                                  .to
-                                                                  .upBitData
-                                                                  .value
-                                                                  .accTradePrice24h[
-                                                                      index]
-                                                                  .tradePrice
-                                                                  .toString(),
+                                                              : state.value == 6
+                                                                  ? LeftController
+                                                                      .to
+                                                                      .upBitData
+                                                                      .value
+                                                                      .accTradePrice24h[
+                                                                          index]
+                                                                      .tradePrice
+                                                                      .toString()
+                                                                  : LeftController
+                                                                      .to
+                                                                      .upBitData
+                                                                      .value
+                                                                      .market[
+                                                                          index]
+                                                                      .tradePrice
+                                                                      .toString(),
                                       14)),
                               Expanded(
                                   flex: highPriceFlex,
@@ -424,14 +451,23 @@ class UpBitListDialog extends StatelessWidget {
                                                                       index]
                                                                   .highPrice
                                                                   .toString()
-                                                              : LeftController
-                                                                  .to
-                                                                  .upBitData
-                                                                  .value
-                                                                  .accTradePrice24h[
-                                                                      index]
-                                                                  .highPrice
-                                                                  .toString(),
+                                                              : state.value == 6
+                                                                  ? LeftController
+                                                                      .to
+                                                                      .upBitData
+                                                                      .value
+                                                                      .accTradePrice24h[
+                                                                          index]
+                                                                      .highPrice
+                                                                      .toString()
+                                                                  : LeftController
+                                                                      .to
+                                                                      .upBitData
+                                                                      .value
+                                                                      .market[
+                                                                          index]
+                                                                      .highPrice
+                                                                      .toString(),
                                       14)),
                               Expanded(
                                   flex: lowPriceFlex,
@@ -481,68 +517,93 @@ class UpBitListDialog extends StatelessWidget {
                                                                       index]
                                                                   .lowPrice
                                                                   .toString()
-                                                              : LeftController
-                                                                  .to
-                                                                  .upBitData
-                                                                  .value
-                                                                  .accTradePrice24h[
-                                                                      index]
-                                                                  .lowPrice
-                                                                  .toString(),
+                                                              : state.value == 6
+                                                                  ? LeftController
+                                                                      .to
+                                                                      .upBitData
+                                                                      .value
+                                                                      .accTradePrice24h[
+                                                                          index]
+                                                                      .lowPrice
+                                                                      .toString()
+                                                                  : LeftController
+                                                                      .to
+                                                                      .upBitData
+                                                                      .value
+                                                                      .market[
+                                                                          index]
+                                                                      .lowPrice
+                                                                      .toString(),
                                       14)),
                               Expanded(
                                   flex: changeRateFlex,
                                   child: DecimalText(
                                     state.value == 0
                                         ? LeftController
-                                            .to
-                                            .upBitData
-                                            .value
-                                            .accTradeVolume24h[index]
-                                            .signedChangeRate
-                                        : state.value == 1
-                                            ? LeftController
                                                 .to
                                                 .upBitData
                                                 .value
-                                                .signedChangeRate[index]
-                                                .signedChangeRate
-                                            : state.value == 2
-                                                ? LeftController
+                                                .accTradeVolume24h[index]
+                                                .signedChangeRate *
+                                            100
+                                        : state.value == 1
+                                            ? LeftController
                                                     .to
                                                     .upBitData
                                                     .value
-                                                    .tradePrice[index]
-                                                    .signedChangeRate
-                                                : state.value == 3
-                                                    ? LeftController
+                                                    .signedChangeRate[index]
+                                                    .signedChangeRate *
+                                                100
+                                            : state.value == 2
+                                                ? LeftController
                                                         .to
                                                         .upBitData
                                                         .value
-                                                        .highPrice[index]
-                                                        .signedChangeRate
-                                                    : state.value == 4
-                                                        ? LeftController
+                                                        .tradePrice[index]
+                                                        .signedChangeRate *
+                                                    100
+                                                : state.value == 3
+                                                    ? LeftController
                                                             .to
                                                             .upBitData
                                                             .value
-                                                            .lowPrice[index]
-                                                            .signedChangeRate
+                                                            .highPrice[index]
+                                                            .signedChangeRate *
+                                                        100
+                                                    : state.value == 4
+                                                        ? LeftController
+                                                                .to
+                                                                .upBitData
+                                                                .value
+                                                                .lowPrice[index]
+                                                                .signedChangeRate *
+                                                            100
                                                         : state.value == 5
                                                             ? LeftController
-                                                                .to
-                                                                .upBitData
-                                                                .value
-                                                                .signedChangePrice[
-                                                                    index]
-                                                                .signedChangeRate
-                                                            : LeftController
-                                                                .to
-                                                                .upBitData
-                                                                .value
-                                                                .accTradePrice24h[
-                                                                    index]
-                                                                .signedChangeRate,
+                                                                    .to
+                                                                    .upBitData
+                                                                    .value
+                                                                    .signedChangePrice[
+                                                                        index]
+                                                                    .signedChangeRate *
+                                                                100
+                                                            : state.value == 6
+                                                                ? LeftController
+                                                                        .to
+                                                                        .upBitData
+                                                                        .value
+                                                                        .accTradePrice24h[
+                                                                            index]
+                                                                        .signedChangeRate *
+                                                                    100
+                                                                : LeftController
+                                                                        .to
+                                                                        .upBitData
+                                                                        .value
+                                                                        .market[
+                                                                            index]
+                                                                        .signedChangeRate *
+                                                                    100,
                                     14,
                                     rounds: true,
                                     unit: '%',
@@ -593,13 +654,21 @@ class UpBitListDialog extends StatelessWidget {
                                                                 .signedChangePrice[
                                                                     index]
                                                                 .signedChangePrice
-                                                            : LeftController
-                                                                .to
-                                                                .upBitData
-                                                                .value
-                                                                .accTradePrice24h[
-                                                                    index]
-                                                                .signedChangePrice,
+                                                            : state.value == 6
+                                                                ? LeftController
+                                                                    .to
+                                                                    .upBitData
+                                                                    .value
+                                                                    .accTradePrice24h[
+                                                                        index]
+                                                                    .signedChangePrice
+                                                                : LeftController
+                                                                    .to
+                                                                    .upBitData
+                                                                    .value
+                                                                    .market[
+                                                                        index]
+                                                                    .signedChangePrice,
                                     14,
                                     unit: 'KRW'.tr,
                                   )),
@@ -649,13 +718,21 @@ class UpBitListDialog extends StatelessWidget {
                                                                   .signedChangePrice[
                                                                       index]
                                                                   .accTradeVolume24h
-                                                              : LeftController
-                                                                  .to
-                                                                  .upBitData
-                                                                  .value
-                                                                  .accTradePrice24h[
-                                                                      index]
-                                                                  .accTradeVolume24h,
+                                                              : state.value == 6
+                                                                  ? LeftController
+                                                                      .to
+                                                                      .upBitData
+                                                                      .value
+                                                                      .accTradePrice24h[
+                                                                          index]
+                                                                      .accTradeVolume24h
+                                                                  : LeftController
+                                                                      .to
+                                                                      .upBitData
+                                                                      .value
+                                                                      .market[
+                                                                          index]
+                                                                      .accTradeVolume24h,
                                       14)),
                               Expanded(
                                   flex: tradeAmount24hFlex,
@@ -703,91 +780,81 @@ class UpBitListDialog extends StatelessWidget {
                                                                   .signedChangePrice[
                                                                       index]
                                                                   .accTradePrice24h
+                                                              : state.value == 6
+                                                                  ? LeftController
+                                                                      .to
+                                                                      .upBitData
+                                                                      .value
+                                                                      .accTradePrice24h[
+                                                                          index]
+                                                                      .accTradePrice24h
+                                                                  : LeftController
+                                                                      .to
+                                                                      .upBitData
+                                                                      .value
+                                                                      .market[
+                                                                          index]
+                                                                      .accTradePrice24h,
+                                      14)),
+                              Expanded(
+                                  flex: selectFlex,
+                                  child: BInkWell(
+                                    onTap: () {
+                                      var marketName = state.value == 0
+                                          ? LeftController.to.upBitData.value
+                                              .accTradeVolume24h[index].market
+                                          : state.value == 1
+                                              ? LeftController
+                                                  .to
+                                                  .upBitData
+                                                  .value
+                                                  .signedChangeRate[index]
+                                                  .market
+                                              : state.value == 2
+                                                  ? LeftController
+                                                      .to
+                                                      .upBitData
+                                                      .value
+                                                      .tradePrice[index]
+                                                      .market
+                                                  : state.value == 3
+                                                      ? LeftController
+                                                          .to
+                                                          .upBitData
+                                                          .value
+                                                          .highPrice[index]
+                                                          .market
+                                                      : state.value == 4
+                                                          ? LeftController
+                                                              .to
+                                                              .upBitData
+                                                              .value
+                                                              .lowPrice[index]
+                                                              .market
+                                                          : state.value == 5
+                                                              ? LeftController
+                                                                  .to
+                                                                  .upBitData
+                                                                  .value
+                                                                  .signedChangePrice[
+                                                                      index]
+                                                                  .market
                                                               : LeftController
                                                                   .to
                                                                   .upBitData
                                                                   .value
                                                                   .accTradePrice24h[
                                                                       index]
-                                                                  .accTradePrice24h,
-                                      14)),
-                              Expanded(
-                                  flex: selectFlex,
-                                  child: BInkWell(
-                                    onTap: () {
-                                      var marketName = LeftController
-                                          .to
-                                          .marketCode[LeftController
-                                              .to.marketCode
-                                              .indexWhere((element) =>
-                                                  element.market ==
-                                                  (state.value == 0
-                                                      ? LeftController
-                                                          .to
-                                                          .upBitData
-                                                          .value
-                                                          .accTradeVolume24h[
-                                                              index]
-                                                          .market
-                                                      : state.value == 1
-                                                          ? LeftController
-                                                              .to
-                                                              .upBitData
-                                                              .value
-                                                              .signedChangeRate[
-                                                                  index]
-                                                              .market
-                                                          : state.value == 2
-                                                              ? LeftController
-                                                                  .to
-                                                                  .upBitData
-                                                                  .value
-                                                                  .tradePrice[
-                                                                      index]
-                                                                  .market
-                                                              : state.value == 3
-                                                                  ? LeftController
-                                                                      .to
-                                                                      .upBitData
-                                                                      .value
-                                                                      .highPrice[
-                                                                          index]
-                                                                      .market
-                                                                  : state.value ==
-                                                                          4
-                                                                      ? LeftController
-                                                                          .to
-                                                                          .upBitData
-                                                                          .value
-                                                                          .lowPrice[
-                                                                              index]
-                                                                          .market
-                                                                      : state.value ==
-                                                                              5
-                                                                          ? LeftController
-                                                                              .to
-                                                                              .upBitData
-                                                                              .value
-                                                                              .signedChangePrice[
-                                                                                  index]
-                                                                              .market
-                                                                          : LeftController
-                                                                              .to
-                                                                              .upBitData
-                                                                              .value
-                                                                              .accTradePrice24h[index]
-                                                                              .market))]
-                                          .market;
+                                                                  .market;
 
                                       if (!HomeController.to.transactionList
                                           .contains(marketName)) {
                                         if (HomeController
                                                 .to.transactionList.length <
-                                            5) {
+                                            2) {
                                           HomeController.to.transactionList
                                               .add(marketName);
-                                          HomeController.to.transactionStatus
-                                              .add(false);
+
                                         } else {
                                           showToastWidget(ToastWidget(
                                               text: 'max_transaction'.tr));

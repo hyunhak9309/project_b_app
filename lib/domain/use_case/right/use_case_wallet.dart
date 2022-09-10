@@ -1,5 +1,6 @@
 import 'package:project_b/data/entity/upbit/entity_current_info.dart';
 import '../../../data/entity/upbit/entity_my_wallet.dart';
+import '../../../main.dart';
 import '../../model/model_wallet.dart';
 import '../../repository/right/wallet_repository.dart';
 

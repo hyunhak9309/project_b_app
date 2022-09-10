@@ -26,6 +26,7 @@ dependencies:
   mongo_dart: ^0.7.4+1
   oktoast: ^3.2.0
   crypto: ^3.0.2
+  shared_preferences: ^2.0.15
 
 dev_dependencies:
   flutter_test:

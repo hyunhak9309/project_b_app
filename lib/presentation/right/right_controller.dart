@@ -6,6 +6,7 @@ import '../../domain/model/model_change_rate.dart';
 import '../../domain/model/model_wallet.dart';
 import '../../domain/use_case/right/use_case_asset.dart';
 import '../../domain/use_case/right/use_case_wallet.dart';
+import '../../main.dart';
 
 class RightController extends GetxController {
   RightController(
@@ -56,6 +57,7 @@ class RightController extends GetxController {
   void onInit() async {
     super.onInit();
     _timer.start();
+
     Timer.periodic(const Duration(seconds: 1), (timer) {
       processPerSecond(DateTime.now());
 

@@ -20,19 +20,15 @@ ModelMongoCoinList _$ModelMongoCoinListFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ModelMongoCoinList {
-  @JsonKey(name: 'trade_price')
+  List<Model2ndCurrentInfo> get market => throw _privateConstructorUsedError;
   List<Model2ndCurrentInfo> get tradePrice =>
       throw _privateConstructorUsedError;
-  @JsonKey(name: 'signed_change_price')
   List<Model2ndCurrentInfo> get signedChangePrice =>
       throw _privateConstructorUsedError;
-  @JsonKey(name: 'signed_change_rate')
   List<Model2ndCurrentInfo> get signedChangeRate =>
       throw _privateConstructorUsedError;
-  @JsonKey(name: 'acc_trade_price')
   List<Model2ndCurrentInfo> get accTradePrice =>
       throw _privateConstructorUsedError;
-  @JsonKey(name: 'acc_trade_volume')
   List<Model2ndCurrentInfo> get accTradeVolume =>
       throw _privateConstructorUsedError;
 
@@ -48,16 +44,12 @@ abstract class $ModelMongoCoinListCopyWith<$Res> {
           ModelMongoCoinList value, $Res Function(ModelMongoCoinList) then) =
       _$ModelMongoCoinListCopyWithImpl<$Res>;
   $Res call(
-      {@JsonKey(name: 'trade_price')
-          List<Model2ndCurrentInfo> tradePrice,
-      @JsonKey(name: 'signed_change_price')
-          List<Model2ndCurrentInfo> signedChangePrice,
-      @JsonKey(name: 'signed_change_rate')
-          List<Model2ndCurrentInfo> signedChangeRate,
-      @JsonKey(name: 'acc_trade_price')
-          List<Model2ndCurrentInfo> accTradePrice,
-      @JsonKey(name: 'acc_trade_volume')
-          List<Model2ndCurrentInfo> accTradeVolume});
+      {List<Model2ndCurrentInfo> market,
+      List<Model2ndCurrentInfo> tradePrice,
+      List<Model2ndCurrentInfo> signedChangePrice,
+      List<Model2ndCurrentInfo> signedChangeRate,
+      List<Model2ndCurrentInfo> accTradePrice,
+      List<Model2ndCurrentInfo> accTradeVolume});
 }
 
 /// @nodoc
@@ -71,6 +63,7 @@ class _$ModelMongoCoinListCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? market = freezed,
     Object? tradePrice = freezed,
     Object? signedChangePrice = freezed,
     Object? signedChangeRate = freezed,
@@ -78,6 +71,10 @@ class _$ModelMongoCoinListCopyWithImpl<$Res>
     Object? accTradeVolume = freezed,
   }) {
     return _then(_value.copyWith(
+      market: market == freezed
+          ? _value.market
+          : market // ignore: cast_nullable_to_non_nullable
+              as List<Model2ndCurrentInfo>,
       tradePrice: tradePrice == freezed
           ? _value.tradePrice
           : tradePrice // ignore: cast_nullable_to_non_nullable
@@ -110,16 +107,12 @@ abstract class _$$_ModelMongoCoinListCopyWith<$Res>
       __$$_ModelMongoCoinListCopyWithImpl<$Res>;
   @override
   $Res call(
-      {@JsonKey(name: 'trade_price')
-          List<Model2ndCurrentInfo> tradePrice,
-      @JsonKey(name: 'signed_change_price')
-          List<Model2ndCurrentInfo> signedChangePrice,
-      @JsonKey(name: 'signed_change_rate')
-          List<Model2ndCurrentInfo> signedChangeRate,
-      @JsonKey(name: 'acc_trade_price')
-          List<Model2ndCurrentInfo> accTradePrice,
-      @JsonKey(name: 'acc_trade_volume')
-          List<Model2ndCurrentInfo> accTradeVolume});
+      {List<Model2ndCurrentInfo> market,
+      List<Model2ndCurrentInfo> tradePrice,
+      List<Model2ndCurrentInfo> signedChangePrice,
+      List<Model2ndCurrentInfo> signedChangeRate,
+      List<Model2ndCurrentInfo> accTradePrice,
+      List<Model2ndCurrentInfo> accTradeVolume});
 }
 
 /// @nodoc
@@ -135,6 +128,7 @@ class __$$_ModelMongoCoinListCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? market = freezed,
     Object? tradePrice = freezed,
     Object? signedChangePrice = freezed,
     Object? signedChangeRate = freezed,
@@ -142,6 +136,10 @@ class __$$_ModelMongoCoinListCopyWithImpl<$Res>
     Object? accTradeVolume = freezed,
   }) {
     return _then(_$_ModelMongoCoinList(
+      market: market == freezed
+          ? _value._market
+          : market // ignore: cast_nullable_to_non_nullable
+              as List<Model2ndCurrentInfo>,
       tradePrice: tradePrice == freezed
           ? _value._tradePrice
           : tradePrice // ignore: cast_nullable_to_non_nullable
@@ -170,17 +168,14 @@ class __$$_ModelMongoCoinListCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_ModelMongoCoinList implements _ModelMongoCoinList {
   _$_ModelMongoCoinList(
-      {@JsonKey(name: 'trade_price')
-          required final List<Model2ndCurrentInfo> tradePrice,
-      @JsonKey(name: 'signed_change_price')
-          required final List<Model2ndCurrentInfo> signedChangePrice,
-      @JsonKey(name: 'signed_change_rate')
-          required final List<Model2ndCurrentInfo> signedChangeRate,
-      @JsonKey(name: 'acc_trade_price')
-          required final List<Model2ndCurrentInfo> accTradePrice,
-      @JsonKey(name: 'acc_trade_volume')
-          required final List<Model2ndCurrentInfo> accTradeVolume})
-      : _tradePrice = tradePrice,
+      {required final List<Model2ndCurrentInfo> market,
+      required final List<Model2ndCurrentInfo> tradePrice,
+      required final List<Model2ndCurrentInfo> signedChangePrice,
+      required final List<Model2ndCurrentInfo> signedChangeRate,
+      required final List<Model2ndCurrentInfo> accTradePrice,
+      required final List<Model2ndCurrentInfo> accTradeVolume})
+      : _market = market,
+        _tradePrice = tradePrice,
         _signedChangePrice = signedChangePrice,
         _signedChangeRate = signedChangeRate,
         _accTradePrice = accTradePrice,
@@ -189,9 +184,15 @@ class _$_ModelMongoCoinList implements _ModelMongoCoinList {
   factory _$_ModelMongoCoinList.fromJson(Map<String, dynamic> json) =>
       _$$_ModelMongoCoinListFromJson(json);
 
+  final List<Model2ndCurrentInfo> _market;
+  @override
+  List<Model2ndCurrentInfo> get market {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_market);
+  }
+
   final List<Model2ndCurrentInfo> _tradePrice;
   @override
-  @JsonKey(name: 'trade_price')
   List<Model2ndCurrentInfo> get tradePrice {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_tradePrice);
@@ -199,7 +200,6 @@ class _$_ModelMongoCoinList implements _ModelMongoCoinList {
 
   final List<Model2ndCurrentInfo> _signedChangePrice;
   @override
-  @JsonKey(name: 'signed_change_price')
   List<Model2ndCurrentInfo> get signedChangePrice {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_signedChangePrice);
@@ -207,7 +207,6 @@ class _$_ModelMongoCoinList implements _ModelMongoCoinList {
 
   final List<Model2ndCurrentInfo> _signedChangeRate;
   @override
-  @JsonKey(name: 'signed_change_rate')
   List<Model2ndCurrentInfo> get signedChangeRate {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_signedChangeRate);
@@ -215,7 +214,6 @@ class _$_ModelMongoCoinList implements _ModelMongoCoinList {
 
   final List<Model2ndCurrentInfo> _accTradePrice;
   @override
-  @JsonKey(name: 'acc_trade_price')
   List<Model2ndCurrentInfo> get accTradePrice {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_accTradePrice);
@@ -223,7 +221,6 @@ class _$_ModelMongoCoinList implements _ModelMongoCoinList {
 
   final List<Model2ndCurrentInfo> _accTradeVolume;
   @override
-  @JsonKey(name: 'acc_trade_volume')
   List<Model2ndCurrentInfo> get accTradeVolume {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_accTradeVolume);
@@ -231,7 +228,7 @@ class _$_ModelMongoCoinList implements _ModelMongoCoinList {
 
   @override
   String toString() {
-    return 'ModelMongoCoinList(tradePrice: $tradePrice, signedChangePrice: $signedChangePrice, signedChangeRate: $signedChangeRate, accTradePrice: $accTradePrice, accTradeVolume: $accTradeVolume)';
+    return 'ModelMongoCoinList(market: $market, tradePrice: $tradePrice, signedChangePrice: $signedChangePrice, signedChangeRate: $signedChangeRate, accTradePrice: $accTradePrice, accTradeVolume: $accTradeVolume)';
   }
 
   @override
@@ -239,6 +236,7 @@ class _$_ModelMongoCoinList implements _ModelMongoCoinList {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ModelMongoCoinList &&
+            const DeepCollectionEquality().equals(other._market, _market) &&
             const DeepCollectionEquality()
                 .equals(other._tradePrice, _tradePrice) &&
             const DeepCollectionEquality()
@@ -255,6 +253,7 @@ class _$_ModelMongoCoinList implements _ModelMongoCoinList {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      const DeepCollectionEquality().hash(_market),
       const DeepCollectionEquality().hash(_tradePrice),
       const DeepCollectionEquality().hash(_signedChangePrice),
       const DeepCollectionEquality().hash(_signedChangeRate),
@@ -277,35 +276,28 @@ class _$_ModelMongoCoinList implements _ModelMongoCoinList {
 
 abstract class _ModelMongoCoinList implements ModelMongoCoinList {
   factory _ModelMongoCoinList(
-          {@JsonKey(name: 'trade_price')
-              required final List<Model2ndCurrentInfo> tradePrice,
-          @JsonKey(name: 'signed_change_price')
-              required final List<Model2ndCurrentInfo> signedChangePrice,
-          @JsonKey(name: 'signed_change_rate')
-              required final List<Model2ndCurrentInfo> signedChangeRate,
-          @JsonKey(name: 'acc_trade_price')
-              required final List<Model2ndCurrentInfo> accTradePrice,
-          @JsonKey(name: 'acc_trade_volume')
-              required final List<Model2ndCurrentInfo> accTradeVolume}) =
+          {required final List<Model2ndCurrentInfo> market,
+          required final List<Model2ndCurrentInfo> tradePrice,
+          required final List<Model2ndCurrentInfo> signedChangePrice,
+          required final List<Model2ndCurrentInfo> signedChangeRate,
+          required final List<Model2ndCurrentInfo> accTradePrice,
+          required final List<Model2ndCurrentInfo> accTradeVolume}) =
       _$_ModelMongoCoinList;
 
   factory _ModelMongoCoinList.fromJson(Map<String, dynamic> json) =
       _$_ModelMongoCoinList.fromJson;
 
   @override
-  @JsonKey(name: 'trade_price')
+  List<Model2ndCurrentInfo> get market;
+  @override
   List<Model2ndCurrentInfo> get tradePrice;
   @override
-  @JsonKey(name: 'signed_change_price')
   List<Model2ndCurrentInfo> get signedChangePrice;
   @override
-  @JsonKey(name: 'signed_change_rate')
   List<Model2ndCurrentInfo> get signedChangeRate;
   @override
-  @JsonKey(name: 'acc_trade_price')
   List<Model2ndCurrentInfo> get accTradePrice;
   @override
-  @JsonKey(name: 'acc_trade_volume')
   List<Model2ndCurrentInfo> get accTradeVolume;
   @override
   @JsonKey(ignore: true)

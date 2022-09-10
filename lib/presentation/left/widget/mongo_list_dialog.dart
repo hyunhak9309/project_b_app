@@ -18,7 +18,8 @@ class MongoListDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var state = 0.obs; // 0 : 누적 거래량, 1: 변화율, 2: 현재가, 3:변화액, 4: 누적 거래대금
+    var state =
+        0.obs; // 0 : 누적 거래량, 1: 변화율, 2: 현재가, 3:변화액, 4: 누적 거래대금, 5: 마켓 이름 순
     var rankingFlex = 1;
     var coinFlex = 2;
     var tradePriceFlex = 2;
@@ -27,7 +28,6 @@ class MongoListDialog extends StatelessWidget {
     var accTradeVolumeFlex = 2;
     var accTradePriceFlex = 2;
     var selectFlex = 1;
-
 
     return Center(
       child: Container(
@@ -45,7 +45,27 @@ class MongoListDialog extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Expanded(flex: rankingFlex, child: BText('ranking'.tr, 16)),
-                    Expanded(flex: coinFlex, child: BText('coin'.tr, 16)),
+                    Expanded(
+                        flex: coinFlex,
+                        child: BInkWell(
+                            onTap: () {
+                              state.value = 5;
+                            },
+                            child: Center(
+                              child: Obx(
+                                () => Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      BText('coin'.tr, 16),
+                                      if (state.value == 5)
+                                        const BText(
+                                          ' *',
+                                          18,
+                                          color: Colors.yellow,
+                                        ),
+                                    ]),
+                              ),
+                            ))),
                     Expanded(
                         flex: tradePriceFlex,
                         child: BInkWell(
@@ -180,8 +200,11 @@ class MongoListDialog extends StatelessWidget {
                                     : state.value == 3
                                         ? LeftController.to.mongoData.value
                                             .signedChangePrice.length
-                                        : LeftController.to.mongoData.value
-                                            .accTradePrice.length,
+                                        : state.value == 4
+                                            ? LeftController.to.mongoData.value
+                                                .accTradePrice.length
+                                            : LeftController.to.mongoData.value
+                                                .market.length,
                         itemBuilder: (context, index) {
                           return Container(
                             padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
@@ -192,51 +215,45 @@ class MongoListDialog extends StatelessWidget {
                               Expanded(
                                   flex: coinFlex,
                                   child: BText(
-                                      LeftController
-                                          .to
-                                          .marketCode[LeftController
-                                              .to.marketCode
-                                              .indexWhere((element) =>
-                                                  element.market ==
-                                                  (state.value == 0
+                                      state.value == 0
+                                          ? LeftController.to.mongoData.value
+                                              .accTradeVolume[index].market
+                                          : state.value == 1
+                                              ? LeftController
+                                                  .to
+                                                  .mongoData
+                                                  .value
+                                                  .signedChangeRate[index]
+                                                  .market
+                                              : state.value == 2
+                                                  ? LeftController
+                                                      .to
+                                                      .mongoData
+                                                      .value
+                                                      .tradePrice[index]
+                                                      .market
+                                                  : state.value == 3
                                                       ? LeftController
                                                           .to
                                                           .mongoData
                                                           .value
-                                                          .accTradeVolume[index]
+                                                          .signedChangePrice[
+                                                              index]
                                                           .market
-                                                      : state.value == 1
+                                                      : state.value == 4
                                                           ? LeftController
                                                               .to
                                                               .mongoData
                                                               .value
-                                                              .signedChangeRate[
+                                                              .accTradePrice[
                                                                   index]
                                                               .market
-                                                          : state.value == 2
-                                                              ? LeftController
-                                                                  .to
-                                                                  .mongoData
-                                                                  .value
-                                                                  .tradePrice[
-                                                                      index]
-                                                                  .market
-                                                              : state.value == 3
-                                                                  ? LeftController
-                                                                      .to
-                                                                      .mongoData
-                                                                      .value
-                                                                      .signedChangePrice[
-                                                                          index]
-                                                                      .market
-                                                                  : LeftController
-                                                                      .to
-                                                                      .mongoData
-                                                                      .value
-                                                                      .accTradePrice[
-                                                                          index]
-                                                                      .market))]
-                                          .koreanName,
+                                                          : LeftController
+                                                              .to
+                                                              .mongoData
+                                                              .value
+                                                              .market[index]
+                                                              .market,
                                       14)),
                               Expanded(
                                   flex: tradePriceFlex,
@@ -270,13 +287,22 @@ class MongoListDialog extends StatelessWidget {
                                                               index]
                                                           .tradePrice
                                                           .toString()
-                                                      : LeftController
-                                                          .to
-                                                          .mongoData
-                                                          .value
-                                                          .accTradePrice[index]
-                                                          .tradePrice
-                                                          .toString()),
+                                                      : state.value == 4
+                                                          ? LeftController
+                                                              .to
+                                                              .mongoData
+                                                              .value
+                                                              .accTradePrice[
+                                                                  index]
+                                                              .tradePrice
+                                                              .toString()
+                                                          : LeftController
+                                                              .to
+                                                              .mongoData
+                                                              .value
+                                                              .market[index]
+                                                              .tradePrice
+                                                              .toString()),
                                       14)),
                               Expanded(
                                   flex: changeRateFlex,
@@ -310,12 +336,20 @@ class MongoListDialog extends StatelessWidget {
                                                         .signedChangePrice[
                                                             index]
                                                         .signedChangeRate
-                                                    : LeftController
-                                                        .to
-                                                        .mongoData
-                                                        .value
-                                                        .accTradePrice[index]
-                                                        .signedChangeRate),
+                                                    : state.value == 4
+                                                        ? LeftController
+                                                            .to
+                                                            .mongoData
+                                                            .value
+                                                            .accTradePrice[
+                                                                index]
+                                                            .signedChangeRate
+                                                        : LeftController
+                                                            .to
+                                                            .mongoData
+                                                            .value
+                                                            .market[index]
+                                                            .signedChangeRate),
                                     14,
                                     unit: '%',
                                     rounds: true,
@@ -352,12 +386,20 @@ class MongoListDialog extends StatelessWidget {
                                                         .signedChangePrice[
                                                             index]
                                                         .signedChangePrice
-                                                    : LeftController
-                                                        .to
-                                                        .mongoData
-                                                        .value
-                                                        .accTradePrice[index]
-                                                        .signedChangePrice),
+                                                    : state.value == 4
+                                                        ? LeftController
+                                                            .to
+                                                            .mongoData
+                                                            .value
+                                                            .accTradePrice[
+                                                                index]
+                                                            .signedChangePrice
+                                                        : LeftController
+                                                            .to
+                                                            .mongoData
+                                                            .value
+                                                            .market[index]
+                                                            .signedChangePrice),
                                     14,
                                     unit: 'KRW'.tr,
                                     rounds: true,
@@ -395,12 +437,20 @@ class MongoListDialog extends StatelessWidget {
                                                           .signedChangePrice[
                                                               index]
                                                           .accTradeVolume
-                                                      : LeftController
-                                                          .to
-                                                          .mongoData
-                                                          .value
-                                                          .accTradePrice[index]
-                                                          .accTradeVolume),
+                                                      : state.value == 4
+                                                          ? LeftController
+                                                              .to
+                                                              .mongoData
+                                                              .value
+                                                              .accTradePrice[
+                                                                  index]
+                                                              .accTradeVolume
+                                                          : LeftController
+                                                              .to
+                                                              .mongoData
+                                                              .value
+                                                              .market[index]
+                                                              .accTradeVolume),
                                       14)),
                               Expanded(
                                   flex: accTradePriceFlex,
@@ -434,72 +484,72 @@ class MongoListDialog extends StatelessWidget {
                                                           .signedChangePrice[
                                                               index]
                                                           .accTradePrice
-                                                      : LeftController
-                                                          .to
-                                                          .mongoData
-                                                          .value
-                                                          .accTradePrice[index]
-                                                          .accTradePrice),
+                                                      : state.value == 4
+                                                          ? LeftController
+                                                              .to
+                                                              .mongoData
+                                                              .value
+                                                              .accTradePrice[
+                                                                  index]
+                                                              .accTradePrice
+                                                          : LeftController
+                                                              .to
+                                                              .mongoData
+                                                              .value
+                                                              .market[index]
+                                                              .accTradePrice),
                                       14)),
                               Expanded(
                                   flex: selectFlex,
                                   child: BInkWell(
                                     onTap: () {
-                                      var marketName = LeftController
-                                          .to
-                                          .marketCode[LeftController
-                                              .to.marketCode
-                                              .indexWhere((element) =>
-                                                  element.market ==
-                                                  (state.value == 0
+                                      var marketName = state.value == 0
+                                          ? LeftController.to.mongoData.value
+                                              .accTradeVolume[index].market
+                                          : state.value == 1
+                                              ? LeftController
+                                                  .to
+                                                  .mongoData
+                                                  .value
+                                                  .signedChangeRate[index]
+                                                  .market
+                                              : state.value == 2
+                                                  ? LeftController
+                                                      .to
+                                                      .mongoData
+                                                      .value
+                                                      .tradePrice[index]
+                                                      .market
+                                                  : state.value == 3
                                                       ? LeftController
                                                           .to
                                                           .mongoData
                                                           .value
-                                                          .accTradeVolume[index]
+                                                          .signedChangePrice[
+                                                              index]
                                                           .market
-                                                      : state.value == 1
+                                                      : state.value == 4
                                                           ? LeftController
                                                               .to
                                                               .mongoData
                                                               .value
-                                                              .signedChangeRate[
+                                                              .accTradePrice[
                                                                   index]
                                                               .market
-                                                          : state.value == 2
-                                                              ? LeftController
-                                                                  .to
-                                                                  .mongoData
-                                                                  .value
-                                                                  .tradePrice[
-                                                                      index]
-                                                                  .market
-                                                              : state.value == 3
-                                                                  ? LeftController
-                                                                      .to
-                                                                      .mongoData
-                                                                      .value
-                                                                      .signedChangePrice[
-                                                                          index]
-                                                                      .market
-                                                                  : LeftController
-                                                                      .to
-                                                                      .mongoData
-                                                                      .value
-                                                                      .accTradePrice[
-                                                                          index]
-                                                                      .market))]
-                                          .market;
+                                                          : LeftController
+                                                              .to
+                                                              .mongoData
+                                                              .value
+                                                              .market[index]
+                                                              .market;
 
                                       if (!HomeController.to.transactionList
                                           .contains(marketName)) {
                                         if (HomeController
                                                 .to.transactionList.length <
-                                            5) {
+                                            2) {
                                           HomeController.to.transactionList
                                               .add(marketName);
-                                          HomeController.to.transactionStatus
-                                              .add(false);
                                         } else {
                                           showToastWidget(ToastWidget(
                                               text: 'max_transaction'.tr));

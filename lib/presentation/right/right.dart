@@ -237,29 +237,18 @@ class Right extends GetView<RightController> {
       ),
       BButton(
         child: BInkWell(
-          onTap: () {},
-          child: Center(
-            child: BText('auto_start'.tr, 14,
-                fontWeight: FontWeight.bold, color: Colors.red
-                // Theme.of(context).scaffoldBackgroundColor,
-                ),
-          ),
-        ),
-      ),
-      BButton(
-        child: BInkWell(
           onTap: () {
-            HomeController.to.allTransactionStatus.value = false;
+            HomeController.to.autoTransactionStatus.toggle();
           },
           child: Center(
             child: Obx(
               () => BText(
-                'total_pause'.tr,
+                HomeController.to.autoTransactionStatus.value
+                    ? 'auto_start_pause'.tr
+                    : 'auto_start'.tr,
                 14,
                 fontWeight: FontWeight.bold,
-                color: !HomeController.to.allTransactionStatus.value
-                    ? Colors.black12
-                    : Theme.of(context).scaffoldBackgroundColor,
+                color: Theme.of(context).scaffoldBackgroundColor,
               ),
             ),
           ),
@@ -268,22 +257,21 @@ class Right extends GetView<RightController> {
       BButton(
         child: BInkWell(
           onTap: () {
-            HomeController.to.allTransactionStatus.value = true;
+            HomeController.to.allTransactionStatus.toggle();
           },
           child: Center(
             child: Obx(
-              () => BText(
-                'total_restart'.tr,
+              () => BText(  HomeController.to.allTransactionStatus.value ?
+                'total_pause'.tr : 'total_restart'.tr,
                 14,
                 fontWeight: FontWeight.bold,
-                color: HomeController.to.allTransactionStatus.value
-                    ? Colors.black12
-                    : Theme.of(context).scaffoldBackgroundColor,
+                color: Theme.of(context).scaffoldBackgroundColor,
               ),
             ),
           ),
         ),
       ),
+      Expanded(child: Container()),
       BButton(
         child: BInkWell(
           onTap: () {

@@ -76,16 +76,10 @@ class MongoChart extends StatelessWidget {
                               child: BText(
                                   LeftController
                                       .to
-                                      .marketCode[LeftController.to.marketCode
-                                          .indexWhere((element) =>
-                                              element.market ==
-                                              LeftController
-                                                  .to
-                                                  .mongoData
-                                                  .value
-                                                  .accTradeVolume[index]
-                                                  .market)]
-                                      .koreanName,
+                                      .mongoData
+                                      .value
+                                      .accTradeVolume[index]
+                                      .market,
                                   14),
                             ),
                           ]),

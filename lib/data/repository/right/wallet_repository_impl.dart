@@ -2,13 +2,13 @@ import 'package:project_b/data/entity/upbit/entity_current_info.dart';
 import 'package:project_b/data/entity/upbit/entity_withdraw_info/entity_withdraw_info.dart';
 import '../../../domain/repository/right/wallet_repository.dart';
 import '../../../main.dart';
-import '../../data_source/user_server.dart';
+import '../../data_source/up_bit_server.dart';
 import '../../entity/upbit/entity_my_wallet.dart';
 
 class WalletRepositoryImpl implements WalletRepository {
   WalletRepositoryImpl({required this.server});
 
-  final UserServer server;
+  final UpBitServer server;
 
   @override
   Future<List<EntityMyWallet>> getMyWallet() async {
@@ -49,12 +49,9 @@ class WalletRepositoryImpl implements WalletRepository {
     }
   }
 
-
   @override
   void withdrawMoney(int amount) async {
     var process01 = await server.withdrawMoney(amount);
     logger.wtf(process01.body);
   }
-
-
 }

@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 import 'package:mongo_dart/mongo_dart.dart';
 import 'package:project_b/data/entity/mongodb/entity_current_asset.dart';
 import 'package:project_b/data/entity/mongodb/entity_market_info_for_save.dart';
+import 'package:project_b/data/entity/upbit/entity_order_response.dart';
+
 import '../../main.dart';
 
 class MyDB extends GetConnect {
@@ -29,5 +31,25 @@ class MyDB extends GetConnect {
 
   Future<WriteResult> deleteMarketInfo(DateTime time) {
     return db.collection('market_record').deleteMany(where.lte('time', time));
+  }
+
+  Future<List<Map<String, dynamic>>> readOrderRecord(String marketCode) async {
+    return await db
+        .collection('order_record')
+        .find(where.eq('market', marketCode).sortBy('time', descending: true))
+        .toList();
+  }
+
+  Future<WriteResult> insertOrderRecord(EntityOrderResponse orderResponse) {
+    return db.collection('order_record').insertOne(orderResponse.toJson());
+  }
+
+  Future<WriteResult> replaceOrderRecord(
+      String marketCode, String amount) async {
+    logger.w(marketCode);
+    logger.w(amount);
+    return db.collection('order_record').updateOne(
+        where.eq('market', marketCode).eq('volume', amount),
+        modify.set('state', 'done'));
   }
 }

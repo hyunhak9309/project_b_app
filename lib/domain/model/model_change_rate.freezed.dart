@@ -20,17 +20,11 @@ ModelChangeRate _$ModelChangeRateFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ModelChangeRate {
-  @JsonKey(name: 'total_before_minute')
   double? get totalBeforeMinute => throw _privateConstructorUsedError;
-  @JsonKey(name: 'total_before_hour')
   double? get totalBeforeHour => throw _privateConstructorUsedError;
-  @JsonKey(name: 'total_before_day')
   double? get totalBeforeDay => throw _privateConstructorUsedError;
-  @JsonKey(name: 'total_before_week')
   double? get totalBeforeWeek => throw _privateConstructorUsedError;
-  @JsonKey(name: 'total_before_month')
   double? get totalBeforeMonth => throw _privateConstructorUsedError;
-  @JsonKey(name: 'total_before_year')
   double? get totalBeforeYear => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -45,12 +39,12 @@ abstract class $ModelChangeRateCopyWith<$Res> {
           ModelChangeRate value, $Res Function(ModelChangeRate) then) =
       _$ModelChangeRateCopyWithImpl<$Res>;
   $Res call(
-      {@JsonKey(name: 'total_before_minute') double? totalBeforeMinute,
-      @JsonKey(name: 'total_before_hour') double? totalBeforeHour,
-      @JsonKey(name: 'total_before_day') double? totalBeforeDay,
-      @JsonKey(name: 'total_before_week') double? totalBeforeWeek,
-      @JsonKey(name: 'total_before_month') double? totalBeforeMonth,
-      @JsonKey(name: 'total_before_year') double? totalBeforeYear});
+      {double? totalBeforeMinute,
+      double? totalBeforeHour,
+      double? totalBeforeDay,
+      double? totalBeforeWeek,
+      double? totalBeforeMonth,
+      double? totalBeforeYear});
 }
 
 /// @nodoc
@@ -108,12 +102,12 @@ abstract class _$$_ModelChangeRateCopyWith<$Res>
       __$$_ModelChangeRateCopyWithImpl<$Res>;
   @override
   $Res call(
-      {@JsonKey(name: 'total_before_minute') double? totalBeforeMinute,
-      @JsonKey(name: 'total_before_hour') double? totalBeforeHour,
-      @JsonKey(name: 'total_before_day') double? totalBeforeDay,
-      @JsonKey(name: 'total_before_week') double? totalBeforeWeek,
-      @JsonKey(name: 'total_before_month') double? totalBeforeMonth,
-      @JsonKey(name: 'total_before_year') double? totalBeforeYear});
+      {double? totalBeforeMinute,
+      double? totalBeforeHour,
+      double? totalBeforeDay,
+      double? totalBeforeWeek,
+      double? totalBeforeMonth,
+      double? totalBeforeYear});
 }
 
 /// @nodoc
@@ -169,33 +163,27 @@ class __$$_ModelChangeRateCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_ModelChangeRate implements _ModelChangeRate {
   _$_ModelChangeRate(
-      {@JsonKey(name: 'total_before_minute') required this.totalBeforeMinute,
-      @JsonKey(name: 'total_before_hour') required this.totalBeforeHour,
-      @JsonKey(name: 'total_before_day') required this.totalBeforeDay,
-      @JsonKey(name: 'total_before_week') required this.totalBeforeWeek,
-      @JsonKey(name: 'total_before_month') required this.totalBeforeMonth,
-      @JsonKey(name: 'total_before_year') required this.totalBeforeYear});
+      {required this.totalBeforeMinute,
+      required this.totalBeforeHour,
+      required this.totalBeforeDay,
+      required this.totalBeforeWeek,
+      required this.totalBeforeMonth,
+      required this.totalBeforeYear});
 
   factory _$_ModelChangeRate.fromJson(Map<String, dynamic> json) =>
       _$$_ModelChangeRateFromJson(json);
 
   @override
-  @JsonKey(name: 'total_before_minute')
   final double? totalBeforeMinute;
   @override
-  @JsonKey(name: 'total_before_hour')
   final double? totalBeforeHour;
   @override
-  @JsonKey(name: 'total_before_day')
   final double? totalBeforeDay;
   @override
-  @JsonKey(name: 'total_before_week')
   final double? totalBeforeWeek;
   @override
-  @JsonKey(name: 'total_before_month')
   final double? totalBeforeMonth;
   @override
-  @JsonKey(name: 'total_before_year')
   final double? totalBeforeYear;
 
   @override
@@ -248,39 +236,27 @@ class _$_ModelChangeRate implements _ModelChangeRate {
 
 abstract class _ModelChangeRate implements ModelChangeRate {
   factory _ModelChangeRate(
-      {@JsonKey(name: 'total_before_minute')
-          required final double? totalBeforeMinute,
-      @JsonKey(name: 'total_before_hour')
-          required final double? totalBeforeHour,
-      @JsonKey(name: 'total_before_day')
-          required final double? totalBeforeDay,
-      @JsonKey(name: 'total_before_week')
-          required final double? totalBeforeWeek,
-      @JsonKey(name: 'total_before_month')
-          required final double? totalBeforeMonth,
-      @JsonKey(name: 'total_before_year')
-          required final double? totalBeforeYear}) = _$_ModelChangeRate;
+      {required final double? totalBeforeMinute,
+      required final double? totalBeforeHour,
+      required final double? totalBeforeDay,
+      required final double? totalBeforeWeek,
+      required final double? totalBeforeMonth,
+      required final double? totalBeforeYear}) = _$_ModelChangeRate;
 
   factory _ModelChangeRate.fromJson(Map<String, dynamic> json) =
       _$_ModelChangeRate.fromJson;
 
   @override
-  @JsonKey(name: 'total_before_minute')
   double? get totalBeforeMinute;
   @override
-  @JsonKey(name: 'total_before_hour')
   double? get totalBeforeHour;
   @override
-  @JsonKey(name: 'total_before_day')
   double? get totalBeforeDay;
   @override
-  @JsonKey(name: 'total_before_week')
   double? get totalBeforeWeek;
   @override
-  @JsonKey(name: 'total_before_month')
   double? get totalBeforeMonth;
   @override
-  @JsonKey(name: 'total_before_year')
   double? get totalBeforeYear;
   @override
   @JsonKey(ignore: true)

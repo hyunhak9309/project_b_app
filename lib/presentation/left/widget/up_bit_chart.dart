@@ -76,16 +76,10 @@ class UpBitChart extends StatelessWidget {
                               child: BText(
                                   LeftController
                                       .to
-                                      .marketCode[LeftController.to.marketCode
-                                          .indexWhere((element) =>
-                                              element.market ==
-                                              LeftController
-                                                  .to
-                                                  .upBitData
-                                                  .value
-                                                  .accTradeVolume24h[index]
-                                                  .market)]
-                                      .koreanName,
+                                      .upBitData
+                                      .value
+                                      .accTradeVolume24h[index]
+                                      .market,
                                   14),
                             ),
                           ]),

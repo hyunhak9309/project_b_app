@@ -1,4 +1,5 @@
 import 'package:project_b/data/entity/mongodb/entity_current_asset.dart';
+import '../../../main.dart';
 import '../../model/model_change_rate.dart';
 import '../../repository/right/asset_repository.dart';
 
@@ -24,7 +25,7 @@ class UseCaseAsset {
     var standardHour = DateTime(currentTime.year, currentTime.month,
         currentTime.day, currentTime.hour - 1, currentTime.minute);
     var standardDay = DateTime(currentTime.year, currentTime.month,
-        currentTime.day-1, currentTime.hour, currentTime.minute);
+        currentTime.day - 1, currentTime.hour, currentTime.minute);
     var standardWeek = DateTime(currentTime.year, currentTime.month,
         currentTime.day - 7, currentTime.hour, currentTime.minute);
     var standardMonth = DateTime(currentTime.year, currentTime.month - 1,
@@ -41,28 +42,46 @@ class UseCaseAsset {
 
     return ModelChangeRate(
       totalBeforeDay: resultDay != null
-          ? ((currentTotalAmount - resultDay.totalAmount) / resultDay.totalAmount) *
-              100
+          ? resultDay.totalAmount != 0.0
+              ? ((currentTotalAmount - resultDay.totalAmount) /
+                      resultDay.totalAmount) *
+                  100
+              : null
           : null,
       totalBeforeWeek: resultWeek != null
-          ? ((currentTotalAmount - resultWeek.totalAmount) / resultWeek.totalAmount) *
-              100
+          ? resultWeek.totalAmount != 0.0
+              ? ((currentTotalAmount - resultWeek.totalAmount) /
+                      resultWeek.totalAmount) *
+                  100
+              : null
           : null,
       totalBeforeMonth: resultMonth != null
-          ? ((currentTotalAmount - resultMonth.totalAmount) / resultMonth.totalAmount) *
-              100
+          ? resultMonth.totalAmount != 0.0
+              ? ((currentTotalAmount - resultMonth.totalAmount) /
+                      resultMonth.totalAmount) *
+                  100
+              : null
           : null,
       totalBeforeYear: resultYear != null
-          ? ((currentTotalAmount - resultYear.totalAmount) / resultYear.totalAmount) *
-              100
+          ? resultYear.totalAmount != 0.0
+              ? ((currentTotalAmount - resultYear.totalAmount) /
+                      resultYear.totalAmount) *
+                  100
+              : null
           : null,
       totalBeforeMinute: resultMinute != null
-          ? ((currentTotalAmount - resultMinute.totalAmount) / resultMinute.totalAmount) *
-              100
+          ? resultMinute.totalAmount != 0.0
+              ? ((currentTotalAmount - resultMinute.totalAmount) /
+                      resultMinute.totalAmount) *
+                  100
+              : null
           : null,
       totalBeforeHour: resultHour != null
-          ? ((currentTotalAmount - resultHour.totalAmount) / resultHour.totalAmount) *
-              100
+          ? resultHour.totalAmount != 0.0
+              ? ((currentTotalAmount - resultHour.totalAmount) /
+                      resultHour.totalAmount) *
+                  100
+              : null
           : null,
     );
   }

@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:project_b/domain/model/model_2nd_current_info.dart';
 import 'package:project_b/domain/model/model_mongo_coin_list.dart';
+import 'package:project_b/presentation/left/left_controller.dart';
 import '../../../data/entity/mongodb/entity_market_info_for_save.dart';
 import '../../../data/entity/upbit/entity_current_info.dart';
 import '../../repository/left/mongo_repository.dart';
@@ -35,16 +36,19 @@ class UseCaseMongo {
     var time = DateTime(currentTime.year, currentTime.month, currentTime.day,
         currentTime.hour, currentTime.minute - 1, currentTime.second);
 
-    var process01 = await repository.getCoinInfoFromDB(time: time);
+    var process01 = await repository.getCoinInfoFromDB(time: time); // 이전 데이터
 
-    var process02 = <Model2ndCurrentInfo>[];
+    var process02 = <Model2ndCurrentInfo>[]; // 빈데이터
+
     for (var element in currentInfo) {
+
       List<EntityCurrentInfo> beforeData = process01
           .where((beforeElement) => beforeElement.market == element.market)
           .toList();
+
       if (beforeData.isNotEmpty) {
         var data = Model2ndCurrentInfo(
-            market: element.market,
+            market: beforeData[0].market,
             tradePrice: element.tradePrice,
             signedChangePrice: element.tradePrice - beforeData[0].tradePrice,
             signedChangeRate:
@@ -75,7 +79,11 @@ class UseCaseMongo {
     List<Model2ndCurrentInfo> accTradeVolume = List.from(process02);
     accTradeVolume.sort((b, a) => a.accTradeVolume.compareTo(b.accTradeVolume));
 
+    List<Model2ndCurrentInfo> market = List.from(process02);
+    market.sort((a, b) => a.market.compareTo(b.market));
+
     return ModelMongoCoinList(
+        market: market,
         tradePrice: tradePrice,
         signedChangePrice: signedChangePrice,
         signedChangeRate: signedChangeRate,

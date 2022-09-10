@@ -3,9 +3,12 @@ import 'dart:async';
 import 'package:get/get.dart';
 import 'package:project_b/domain/model/model_mongo_coin_list.dart';
 import 'package:project_b/domain/model/model_up_bit_coin_list.dart';
+import 'package:project_b/domain/model/model_up_bit_order_book_list.dart';
 import 'package:project_b/domain/use_case/left/use_case_mongo.dart';
+import 'package:project_b/presentation/center/home_controller.dart';
 import '../../data/entity/upbit/entity_market_code.dart';
 import '../../domain/use_case/left/use_case_up_bit.dart';
+import '../../main.dart';
 import '../right/right_controller.dart';
 
 class LeftController extends GetxController {
@@ -19,6 +22,7 @@ class LeftController extends GetxController {
 
   final RxList<EntityMarketCode> _marketCode = <EntityMarketCode>[].obs;
   final Rx<ModelUpBitCoinList> _upBitData = ModelUpBitCoinList(
+      market: [],
       tradePrice: [],
       signedChangePrice: [],
       signedChangeRate: [],
@@ -28,17 +32,29 @@ class LeftController extends GetxController {
       accTradeVolume24h: []).obs;
 
   final Rx<ModelMongoCoinList> _mongoData = ModelMongoCoinList(
+      market: [],
       tradePrice: [],
       signedChangePrice: [],
       signedChangeRate: [],
       accTradePrice: [],
       accTradeVolume: []).obs;
 
+  final Rx<ModelUpBitOrderBookList> _analyzeOrderBook = ModelUpBitOrderBookList(
+    market: [],
+    tradePrice: [],
+    askBidRatio: [],
+    oneToFiveAskBidRatio: [],
+    oneToFiveOfTotalAskRatio: [],
+    oneToFiveOfTotalBidRatio: [],
+  ).obs;
+
   RxList<EntityMarketCode> get marketCode => _marketCode;
 
   Rx<ModelUpBitCoinList> get upBitData => _upBitData;
 
   Rx<ModelMongoCoinList> get mongoData => _mongoData;
+
+  Rx<ModelUpBitOrderBookList> get analyzeOrderBook => _analyzeOrderBook;
 
   @override
   void onInit() {
@@ -65,11 +81,9 @@ class LeftController extends GetxController {
     _marketCode.value = await getUseCaseUpBit.getMarketCodeList();
     once(_marketCode, (_) async {
       _upBitData.value = await getUseCaseUpBit.getMarketCoinInfo(_marketCode);
-
-
       once(_upBitData, (_) async {
-        getUseCaseUpBit.getOrderBook(_upBitData.value.tradePrice, _marketCode);
-
+        _analyzeOrderBook.value = await getUseCaseUpBit.getOrderBook(
+            _upBitData.value.tradePrice, _marketCode);
         _mongoData.value = await getUseCaseMongo.generateMinute2ndData(
             currentInfo: _upBitData.value.tradePrice, currentTime: currentTime);
       });
@@ -77,15 +91,15 @@ class LeftController extends GetxController {
   }
 
   void processPerSecond(DateTime currentTime) async {
-    // 중복 부름이 없게끔. 데이터 값이 있고나서 부르게 조치
     if (_marketCode.isNotEmpty) {
       _upBitData.value = await getUseCaseUpBit.getMarketCoinInfo(_marketCode);
     }
     if (_upBitData.value.tradePrice.isNotEmpty) {
       getUseCaseMongo.insertMarketInfoToDB(
           infoList: _upBitData.value.tradePrice, currentTime: currentTime);
+      _analyzeOrderBook.value = await getUseCaseUpBit.getOrderBook(
+          _upBitData.value.tradePrice, _marketCode);
     }
-
   }
 
   void processPerMinute(DateTime currentTime) async {

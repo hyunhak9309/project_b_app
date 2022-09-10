@@ -21,15 +21,11 @@ ModelAnalyzeOrderbook _$ModelAnalyzeOrderbookFromJson(
 
 /// @nodoc
 mixin _$ModelAnalyzeOrderbook {
-  @JsonKey(name: 'trade_price')
+  String get market => throw _privateConstructorUsedError;
   double get tradePrice => throw _privateConstructorUsedError;
-  @JsonKey(name: 'ask_bid_ratio')
   double get askBidRatio => throw _privateConstructorUsedError;
-  @JsonKey(name: 'one_to_five_ask_bid_ratio')
   double get oneToFiveAskBidRatio => throw _privateConstructorUsedError;
-  @JsonKey(name: 'one_to_five_of_total_ask_ratio')
   double get oneToFiveOfTotalAskRatio => throw _privateConstructorUsedError;
-  @JsonKey(name: 'one_to_five_of_total_bid_ratio')
   double get oneToFiveOfTotalBidRatio => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -44,16 +40,12 @@ abstract class $ModelAnalyzeOrderbookCopyWith<$Res> {
           $Res Function(ModelAnalyzeOrderbook) then) =
       _$ModelAnalyzeOrderbookCopyWithImpl<$Res>;
   $Res call(
-      {@JsonKey(name: 'trade_price')
-          double tradePrice,
-      @JsonKey(name: 'ask_bid_ratio')
-          double askBidRatio,
-      @JsonKey(name: 'one_to_five_ask_bid_ratio')
-          double oneToFiveAskBidRatio,
-      @JsonKey(name: 'one_to_five_of_total_ask_ratio')
-          double oneToFiveOfTotalAskRatio,
-      @JsonKey(name: 'one_to_five_of_total_bid_ratio')
-          double oneToFiveOfTotalBidRatio});
+      {String market,
+      double tradePrice,
+      double askBidRatio,
+      double oneToFiveAskBidRatio,
+      double oneToFiveOfTotalAskRatio,
+      double oneToFiveOfTotalBidRatio});
 }
 
 /// @nodoc
@@ -67,6 +59,7 @@ class _$ModelAnalyzeOrderbookCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? market = freezed,
     Object? tradePrice = freezed,
     Object? askBidRatio = freezed,
     Object? oneToFiveAskBidRatio = freezed,
@@ -74,6 +67,10 @@ class _$ModelAnalyzeOrderbookCopyWithImpl<$Res>
     Object? oneToFiveOfTotalBidRatio = freezed,
   }) {
     return _then(_value.copyWith(
+      market: market == freezed
+          ? _value.market
+          : market // ignore: cast_nullable_to_non_nullable
+              as String,
       tradePrice: tradePrice == freezed
           ? _value.tradePrice
           : tradePrice // ignore: cast_nullable_to_non_nullable
@@ -106,16 +103,12 @@ abstract class _$$_ModelAnalyzeOrderbookCopyWith<$Res>
       __$$_ModelAnalyzeOrderbookCopyWithImpl<$Res>;
   @override
   $Res call(
-      {@JsonKey(name: 'trade_price')
-          double tradePrice,
-      @JsonKey(name: 'ask_bid_ratio')
-          double askBidRatio,
-      @JsonKey(name: 'one_to_five_ask_bid_ratio')
-          double oneToFiveAskBidRatio,
-      @JsonKey(name: 'one_to_five_of_total_ask_ratio')
-          double oneToFiveOfTotalAskRatio,
-      @JsonKey(name: 'one_to_five_of_total_bid_ratio')
-          double oneToFiveOfTotalBidRatio});
+      {String market,
+      double tradePrice,
+      double askBidRatio,
+      double oneToFiveAskBidRatio,
+      double oneToFiveOfTotalAskRatio,
+      double oneToFiveOfTotalBidRatio});
 }
 
 /// @nodoc
@@ -132,6 +125,7 @@ class __$$_ModelAnalyzeOrderbookCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? market = freezed,
     Object? tradePrice = freezed,
     Object? askBidRatio = freezed,
     Object? oneToFiveAskBidRatio = freezed,
@@ -139,6 +133,10 @@ class __$$_ModelAnalyzeOrderbookCopyWithImpl<$Res>
     Object? oneToFiveOfTotalBidRatio = freezed,
   }) {
     return _then(_$_ModelAnalyzeOrderbook(
+      market: market == freezed
+          ? _value.market
+          : market // ignore: cast_nullable_to_non_nullable
+              as String,
       tradePrice: tradePrice == freezed
           ? _value.tradePrice
           : tradePrice // ignore: cast_nullable_to_non_nullable
@@ -167,39 +165,32 @@ class __$$_ModelAnalyzeOrderbookCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_ModelAnalyzeOrderbook implements _ModelAnalyzeOrderbook {
   _$_ModelAnalyzeOrderbook(
-      {@JsonKey(name: 'trade_price')
-          required this.tradePrice,
-      @JsonKey(name: 'ask_bid_ratio')
-          required this.askBidRatio,
-      @JsonKey(name: 'one_to_five_ask_bid_ratio')
-          required this.oneToFiveAskBidRatio,
-      @JsonKey(name: 'one_to_five_of_total_ask_ratio')
-          required this.oneToFiveOfTotalAskRatio,
-      @JsonKey(name: 'one_to_five_of_total_bid_ratio')
-          required this.oneToFiveOfTotalBidRatio});
+      {required this.market,
+      required this.tradePrice,
+      required this.askBidRatio,
+      required this.oneToFiveAskBidRatio,
+      required this.oneToFiveOfTotalAskRatio,
+      required this.oneToFiveOfTotalBidRatio});
 
   factory _$_ModelAnalyzeOrderbook.fromJson(Map<String, dynamic> json) =>
       _$$_ModelAnalyzeOrderbookFromJson(json);
 
   @override
-  @JsonKey(name: 'trade_price')
+  final String market;
+  @override
   final double tradePrice;
   @override
-  @JsonKey(name: 'ask_bid_ratio')
   final double askBidRatio;
   @override
-  @JsonKey(name: 'one_to_five_ask_bid_ratio')
   final double oneToFiveAskBidRatio;
   @override
-  @JsonKey(name: 'one_to_five_of_total_ask_ratio')
   final double oneToFiveOfTotalAskRatio;
   @override
-  @JsonKey(name: 'one_to_five_of_total_bid_ratio')
   final double oneToFiveOfTotalBidRatio;
 
   @override
   String toString() {
-    return 'ModelAnalyzeOrderbook(tradePrice: $tradePrice, askBidRatio: $askBidRatio, oneToFiveAskBidRatio: $oneToFiveAskBidRatio, oneToFiveOfTotalAskRatio: $oneToFiveOfTotalAskRatio, oneToFiveOfTotalBidRatio: $oneToFiveOfTotalBidRatio)';
+    return 'ModelAnalyzeOrderbook(market: $market, tradePrice: $tradePrice, askBidRatio: $askBidRatio, oneToFiveAskBidRatio: $oneToFiveAskBidRatio, oneToFiveOfTotalAskRatio: $oneToFiveOfTotalAskRatio, oneToFiveOfTotalBidRatio: $oneToFiveOfTotalBidRatio)';
   }
 
   @override
@@ -207,6 +198,7 @@ class _$_ModelAnalyzeOrderbook implements _ModelAnalyzeOrderbook {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ModelAnalyzeOrderbook &&
+            const DeepCollectionEquality().equals(other.market, market) &&
             const DeepCollectionEquality()
                 .equals(other.tradePrice, tradePrice) &&
             const DeepCollectionEquality()
@@ -223,6 +215,7 @@ class _$_ModelAnalyzeOrderbook implements _ModelAnalyzeOrderbook {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      const DeepCollectionEquality().hash(market),
       const DeepCollectionEquality().hash(tradePrice),
       const DeepCollectionEquality().hash(askBidRatio),
       const DeepCollectionEquality().hash(oneToFiveAskBidRatio),
@@ -245,35 +238,28 @@ class _$_ModelAnalyzeOrderbook implements _ModelAnalyzeOrderbook {
 
 abstract class _ModelAnalyzeOrderbook implements ModelAnalyzeOrderbook {
   factory _ModelAnalyzeOrderbook(
-          {@JsonKey(name: 'trade_price')
-              required final double tradePrice,
-          @JsonKey(name: 'ask_bid_ratio')
-              required final double askBidRatio,
-          @JsonKey(name: 'one_to_five_ask_bid_ratio')
-              required final double oneToFiveAskBidRatio,
-          @JsonKey(name: 'one_to_five_of_total_ask_ratio')
-              required final double oneToFiveOfTotalAskRatio,
-          @JsonKey(name: 'one_to_five_of_total_bid_ratio')
-              required final double oneToFiveOfTotalBidRatio}) =
+          {required final String market,
+          required final double tradePrice,
+          required final double askBidRatio,
+          required final double oneToFiveAskBidRatio,
+          required final double oneToFiveOfTotalAskRatio,
+          required final double oneToFiveOfTotalBidRatio}) =
       _$_ModelAnalyzeOrderbook;
 
   factory _ModelAnalyzeOrderbook.fromJson(Map<String, dynamic> json) =
       _$_ModelAnalyzeOrderbook.fromJson;
 
   @override
-  @JsonKey(name: 'trade_price')
+  String get market;
+  @override
   double get tradePrice;
   @override
-  @JsonKey(name: 'ask_bid_ratio')
   double get askBidRatio;
   @override
-  @JsonKey(name: 'one_to_five_ask_bid_ratio')
   double get oneToFiveAskBidRatio;
   @override
-  @JsonKey(name: 'one_to_five_of_total_ask_ratio')
   double get oneToFiveOfTotalAskRatio;
   @override
-  @JsonKey(name: 'one_to_five_of_total_bid_ratio')
   double get oneToFiveOfTotalBidRatio;
   @override
   @JsonKey(ignore: true)

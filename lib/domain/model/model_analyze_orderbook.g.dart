@@ -9,22 +9,23 @@ part of 'model_analyze_orderbook.dart';
 _$_ModelAnalyzeOrderbook _$$_ModelAnalyzeOrderbookFromJson(
         Map<String, dynamic> json) =>
     _$_ModelAnalyzeOrderbook(
-      tradePrice: (json['trade_price'] as num).toDouble(),
-      askBidRatio: (json['ask_bid_ratio'] as num).toDouble(),
-      oneToFiveAskBidRatio:
-          (json['one_to_five_ask_bid_ratio'] as num).toDouble(),
+      market: json['market'] as String,
+      tradePrice: (json['tradePrice'] as num).toDouble(),
+      askBidRatio: (json['askBidRatio'] as num).toDouble(),
+      oneToFiveAskBidRatio: (json['oneToFiveAskBidRatio'] as num).toDouble(),
       oneToFiveOfTotalAskRatio:
-          (json['one_to_five_of_total_ask_ratio'] as num).toDouble(),
+          (json['oneToFiveOfTotalAskRatio'] as num).toDouble(),
       oneToFiveOfTotalBidRatio:
-          (json['one_to_five_of_total_bid_ratio'] as num).toDouble(),
+          (json['oneToFiveOfTotalBidRatio'] as num).toDouble(),
     );
 
 Map<String, dynamic> _$$_ModelAnalyzeOrderbookToJson(
         _$_ModelAnalyzeOrderbook instance) =>
     <String, dynamic>{
-      'trade_price': instance.tradePrice,
-      'ask_bid_ratio': instance.askBidRatio,
-      'one_to_five_ask_bid_ratio': instance.oneToFiveAskBidRatio,
-      'one_to_five_of_total_ask_ratio': instance.oneToFiveOfTotalAskRatio,
-      'one_to_five_of_total_bid_ratio': instance.oneToFiveOfTotalBidRatio,
+      'market': instance.market,
+      'tradePrice': instance.tradePrice,
+      'askBidRatio': instance.askBidRatio,
+      'oneToFiveAskBidRatio': instance.oneToFiveAskBidRatio,
+      'oneToFiveOfTotalAskRatio': instance.oneToFiveOfTotalAskRatio,
+      'oneToFiveOfTotalBidRatio': instance.oneToFiveOfTotalBidRatio,
     };

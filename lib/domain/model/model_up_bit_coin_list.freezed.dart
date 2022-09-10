@@ -20,22 +20,16 @@ ModelUpBitCoinList _$ModelUpBitCoinListFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ModelUpBitCoinList {
-  @JsonKey(name: 'trade_price')
+  List<EntityCurrentInfo> get market => throw _privateConstructorUsedError;
   List<EntityCurrentInfo> get tradePrice => throw _privateConstructorUsedError;
-  @JsonKey(name: 'signed_change_price')
   List<EntityCurrentInfo> get signedChangePrice =>
       throw _privateConstructorUsedError;
-  @JsonKey(name: 'signed_change_rate')
   List<EntityCurrentInfo> get signedChangeRate =>
       throw _privateConstructorUsedError;
-  @JsonKey(name: 'high_price')
   List<EntityCurrentInfo> get highPrice => throw _privateConstructorUsedError;
-  @JsonKey(name: 'low_price')
   List<EntityCurrentInfo> get lowPrice => throw _privateConstructorUsedError;
-  @JsonKey(name: 'acc_trade_price_24h')
   List<EntityCurrentInfo> get accTradePrice24h =>
       throw _privateConstructorUsedError;
-  @JsonKey(name: 'acc_trade_volume_24h')
   List<EntityCurrentInfo> get accTradeVolume24h =>
       throw _privateConstructorUsedError;
 
@@ -51,20 +45,14 @@ abstract class $ModelUpBitCoinListCopyWith<$Res> {
           ModelUpBitCoinList value, $Res Function(ModelUpBitCoinList) then) =
       _$ModelUpBitCoinListCopyWithImpl<$Res>;
   $Res call(
-      {@JsonKey(name: 'trade_price')
-          List<EntityCurrentInfo> tradePrice,
-      @JsonKey(name: 'signed_change_price')
-          List<EntityCurrentInfo> signedChangePrice,
-      @JsonKey(name: 'signed_change_rate')
-          List<EntityCurrentInfo> signedChangeRate,
-      @JsonKey(name: 'high_price')
-          List<EntityCurrentInfo> highPrice,
-      @JsonKey(name: 'low_price')
-          List<EntityCurrentInfo> lowPrice,
-      @JsonKey(name: 'acc_trade_price_24h')
-          List<EntityCurrentInfo> accTradePrice24h,
-      @JsonKey(name: 'acc_trade_volume_24h')
-          List<EntityCurrentInfo> accTradeVolume24h});
+      {List<EntityCurrentInfo> market,
+      List<EntityCurrentInfo> tradePrice,
+      List<EntityCurrentInfo> signedChangePrice,
+      List<EntityCurrentInfo> signedChangeRate,
+      List<EntityCurrentInfo> highPrice,
+      List<EntityCurrentInfo> lowPrice,
+      List<EntityCurrentInfo> accTradePrice24h,
+      List<EntityCurrentInfo> accTradeVolume24h});
 }
 
 /// @nodoc
@@ -78,6 +66,7 @@ class _$ModelUpBitCoinListCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? market = freezed,
     Object? tradePrice = freezed,
     Object? signedChangePrice = freezed,
     Object? signedChangeRate = freezed,
@@ -87,6 +76,10 @@ class _$ModelUpBitCoinListCopyWithImpl<$Res>
     Object? accTradeVolume24h = freezed,
   }) {
     return _then(_value.copyWith(
+      market: market == freezed
+          ? _value.market
+          : market // ignore: cast_nullable_to_non_nullable
+              as List<EntityCurrentInfo>,
       tradePrice: tradePrice == freezed
           ? _value.tradePrice
           : tradePrice // ignore: cast_nullable_to_non_nullable
@@ -127,20 +120,14 @@ abstract class _$$_ModelUpBitCoinListCopyWith<$Res>
       __$$_ModelUpBitCoinListCopyWithImpl<$Res>;
   @override
   $Res call(
-      {@JsonKey(name: 'trade_price')
-          List<EntityCurrentInfo> tradePrice,
-      @JsonKey(name: 'signed_change_price')
-          List<EntityCurrentInfo> signedChangePrice,
-      @JsonKey(name: 'signed_change_rate')
-          List<EntityCurrentInfo> signedChangeRate,
-      @JsonKey(name: 'high_price')
-          List<EntityCurrentInfo> highPrice,
-      @JsonKey(name: 'low_price')
-          List<EntityCurrentInfo> lowPrice,
-      @JsonKey(name: 'acc_trade_price_24h')
-          List<EntityCurrentInfo> accTradePrice24h,
-      @JsonKey(name: 'acc_trade_volume_24h')
-          List<EntityCurrentInfo> accTradeVolume24h});
+      {List<EntityCurrentInfo> market,
+      List<EntityCurrentInfo> tradePrice,
+      List<EntityCurrentInfo> signedChangePrice,
+      List<EntityCurrentInfo> signedChangeRate,
+      List<EntityCurrentInfo> highPrice,
+      List<EntityCurrentInfo> lowPrice,
+      List<EntityCurrentInfo> accTradePrice24h,
+      List<EntityCurrentInfo> accTradeVolume24h});
 }
 
 /// @nodoc
@@ -156,6 +143,7 @@ class __$$_ModelUpBitCoinListCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? market = freezed,
     Object? tradePrice = freezed,
     Object? signedChangePrice = freezed,
     Object? signedChangeRate = freezed,
@@ -165,6 +153,10 @@ class __$$_ModelUpBitCoinListCopyWithImpl<$Res>
     Object? accTradeVolume24h = freezed,
   }) {
     return _then(_$_ModelUpBitCoinList(
+      market: market == freezed
+          ? _value._market
+          : market // ignore: cast_nullable_to_non_nullable
+              as List<EntityCurrentInfo>,
       tradePrice: tradePrice == freezed
           ? _value._tradePrice
           : tradePrice // ignore: cast_nullable_to_non_nullable
@@ -201,21 +193,16 @@ class __$$_ModelUpBitCoinListCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_ModelUpBitCoinList implements _ModelUpBitCoinList {
   _$_ModelUpBitCoinList(
-      {@JsonKey(name: 'trade_price')
-          required final List<EntityCurrentInfo> tradePrice,
-      @JsonKey(name: 'signed_change_price')
-          required final List<EntityCurrentInfo> signedChangePrice,
-      @JsonKey(name: 'signed_change_rate')
-          required final List<EntityCurrentInfo> signedChangeRate,
-      @JsonKey(name: 'high_price')
-          required final List<EntityCurrentInfo> highPrice,
-      @JsonKey(name: 'low_price')
-          required final List<EntityCurrentInfo> lowPrice,
-      @JsonKey(name: 'acc_trade_price_24h')
-          required final List<EntityCurrentInfo> accTradePrice24h,
-      @JsonKey(name: 'acc_trade_volume_24h')
-          required final List<EntityCurrentInfo> accTradeVolume24h})
-      : _tradePrice = tradePrice,
+      {required final List<EntityCurrentInfo> market,
+      required final List<EntityCurrentInfo> tradePrice,
+      required final List<EntityCurrentInfo> signedChangePrice,
+      required final List<EntityCurrentInfo> signedChangeRate,
+      required final List<EntityCurrentInfo> highPrice,
+      required final List<EntityCurrentInfo> lowPrice,
+      required final List<EntityCurrentInfo> accTradePrice24h,
+      required final List<EntityCurrentInfo> accTradeVolume24h})
+      : _market = market,
+        _tradePrice = tradePrice,
         _signedChangePrice = signedChangePrice,
         _signedChangeRate = signedChangeRate,
         _highPrice = highPrice,
@@ -226,9 +213,15 @@ class _$_ModelUpBitCoinList implements _ModelUpBitCoinList {
   factory _$_ModelUpBitCoinList.fromJson(Map<String, dynamic> json) =>
       _$$_ModelUpBitCoinListFromJson(json);
 
+  final List<EntityCurrentInfo> _market;
+  @override
+  List<EntityCurrentInfo> get market {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_market);
+  }
+
   final List<EntityCurrentInfo> _tradePrice;
   @override
-  @JsonKey(name: 'trade_price')
   List<EntityCurrentInfo> get tradePrice {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_tradePrice);
@@ -236,7 +229,6 @@ class _$_ModelUpBitCoinList implements _ModelUpBitCoinList {
 
   final List<EntityCurrentInfo> _signedChangePrice;
   @override
-  @JsonKey(name: 'signed_change_price')
   List<EntityCurrentInfo> get signedChangePrice {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_signedChangePrice);
@@ -244,7 +236,6 @@ class _$_ModelUpBitCoinList implements _ModelUpBitCoinList {
 
   final List<EntityCurrentInfo> _signedChangeRate;
   @override
-  @JsonKey(name: 'signed_change_rate')
   List<EntityCurrentInfo> get signedChangeRate {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_signedChangeRate);
@@ -252,7 +243,6 @@ class _$_ModelUpBitCoinList implements _ModelUpBitCoinList {
 
   final List<EntityCurrentInfo> _highPrice;
   @override
-  @JsonKey(name: 'high_price')
   List<EntityCurrentInfo> get highPrice {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_highPrice);
@@ -260,7 +250,6 @@ class _$_ModelUpBitCoinList implements _ModelUpBitCoinList {
 
   final List<EntityCurrentInfo> _lowPrice;
   @override
-  @JsonKey(name: 'low_price')
   List<EntityCurrentInfo> get lowPrice {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_lowPrice);
@@ -268,7 +257,6 @@ class _$_ModelUpBitCoinList implements _ModelUpBitCoinList {
 
   final List<EntityCurrentInfo> _accTradePrice24h;
   @override
-  @JsonKey(name: 'acc_trade_price_24h')
   List<EntityCurrentInfo> get accTradePrice24h {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_accTradePrice24h);
@@ -276,7 +264,6 @@ class _$_ModelUpBitCoinList implements _ModelUpBitCoinList {
 
   final List<EntityCurrentInfo> _accTradeVolume24h;
   @override
-  @JsonKey(name: 'acc_trade_volume_24h')
   List<EntityCurrentInfo> get accTradeVolume24h {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_accTradeVolume24h);
@@ -284,7 +271,7 @@ class _$_ModelUpBitCoinList implements _ModelUpBitCoinList {
 
   @override
   String toString() {
-    return 'ModelUpBitCoinList(tradePrice: $tradePrice, signedChangePrice: $signedChangePrice, signedChangeRate: $signedChangeRate, highPrice: $highPrice, lowPrice: $lowPrice, accTradePrice24h: $accTradePrice24h, accTradeVolume24h: $accTradeVolume24h)';
+    return 'ModelUpBitCoinList(market: $market, tradePrice: $tradePrice, signedChangePrice: $signedChangePrice, signedChangeRate: $signedChangeRate, highPrice: $highPrice, lowPrice: $lowPrice, accTradePrice24h: $accTradePrice24h, accTradeVolume24h: $accTradeVolume24h)';
   }
 
   @override
@@ -292,6 +279,7 @@ class _$_ModelUpBitCoinList implements _ModelUpBitCoinList {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ModelUpBitCoinList &&
+            const DeepCollectionEquality().equals(other._market, _market) &&
             const DeepCollectionEquality()
                 .equals(other._tradePrice, _tradePrice) &&
             const DeepCollectionEquality()
@@ -311,6 +299,7 @@ class _$_ModelUpBitCoinList implements _ModelUpBitCoinList {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      const DeepCollectionEquality().hash(_market),
       const DeepCollectionEquality().hash(_tradePrice),
       const DeepCollectionEquality().hash(_signedChangePrice),
       const DeepCollectionEquality().hash(_signedChangeRate),
@@ -335,45 +324,34 @@ class _$_ModelUpBitCoinList implements _ModelUpBitCoinList {
 
 abstract class _ModelUpBitCoinList implements ModelUpBitCoinList {
   factory _ModelUpBitCoinList(
-          {@JsonKey(name: 'trade_price')
-              required final List<EntityCurrentInfo> tradePrice,
-          @JsonKey(name: 'signed_change_price')
-              required final List<EntityCurrentInfo> signedChangePrice,
-          @JsonKey(name: 'signed_change_rate')
-              required final List<EntityCurrentInfo> signedChangeRate,
-          @JsonKey(name: 'high_price')
-              required final List<EntityCurrentInfo> highPrice,
-          @JsonKey(name: 'low_price')
-              required final List<EntityCurrentInfo> lowPrice,
-          @JsonKey(name: 'acc_trade_price_24h')
-              required final List<EntityCurrentInfo> accTradePrice24h,
-          @JsonKey(name: 'acc_trade_volume_24h')
-              required final List<EntityCurrentInfo> accTradeVolume24h}) =
+          {required final List<EntityCurrentInfo> market,
+          required final List<EntityCurrentInfo> tradePrice,
+          required final List<EntityCurrentInfo> signedChangePrice,
+          required final List<EntityCurrentInfo> signedChangeRate,
+          required final List<EntityCurrentInfo> highPrice,
+          required final List<EntityCurrentInfo> lowPrice,
+          required final List<EntityCurrentInfo> accTradePrice24h,
+          required final List<EntityCurrentInfo> accTradeVolume24h}) =
       _$_ModelUpBitCoinList;
 
   factory _ModelUpBitCoinList.fromJson(Map<String, dynamic> json) =
       _$_ModelUpBitCoinList.fromJson;
 
   @override
-  @JsonKey(name: 'trade_price')
+  List<EntityCurrentInfo> get market;
+  @override
   List<EntityCurrentInfo> get tradePrice;
   @override
-  @JsonKey(name: 'signed_change_price')
   List<EntityCurrentInfo> get signedChangePrice;
   @override
-  @JsonKey(name: 'signed_change_rate')
   List<EntityCurrentInfo> get signedChangeRate;
   @override
-  @JsonKey(name: 'high_price')
   List<EntityCurrentInfo> get highPrice;
   @override
-  @JsonKey(name: 'low_price')
   List<EntityCurrentInfo> get lowPrice;
   @override
-  @JsonKey(name: 'acc_trade_price_24h')
   List<EntityCurrentInfo> get accTradePrice24h;
   @override
-  @JsonKey(name: 'acc_trade_volume_24h')
   List<EntityCurrentInfo> get accTradeVolume24h;
   @override
   @JsonKey(ignore: true)

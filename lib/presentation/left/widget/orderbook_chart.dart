@@ -6,6 +6,7 @@ import 'dart:math' as math;
 import '../../component/b_text.dart';
 import '../../component/drawBorder.dart';
 import 'mongo_list_dialog.dart';
+import 'orderbook_list_dialog.dart';
 
 class OrderBookChart extends StatelessWidget {
   const OrderBookChart({Key? key}) : super(key: key);
@@ -25,8 +26,8 @@ class OrderBookChart extends StatelessWidget {
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      BText('local'.tr, 16),
-                      BText('1m'.tr, 12),
+                      BText('upBitInfo'.tr, 16),
+                      BText('1s'.tr, 12),
                       const SizedBox(
                         width: 5,
                       ),
@@ -34,12 +35,12 @@ class OrderBookChart extends StatelessWidget {
                       const SizedBox(
                         width: 5,
                       ),
-                      BText('trade_volume_1m'.tr, 14)
+                      BText('one_to_five_ratio'.tr, 14)
                     ],
                   ),
                   BInkWell(
                     onTap: () {
-                      Get.dialog(const MongoListDialog());
+                      Get.dialog(const OrderBookListDialog());
                     },
                     child: Transform.rotate(
                         angle: math.pi,
@@ -66,7 +67,7 @@ class OrderBookChart extends StatelessWidget {
                 child: Obx(
                   () => ListView.builder(
                       itemCount: LeftController
-                          .to.mongoData.value.accTradeVolume.length,
+                          .to.analyzeOrderBook.value.oneToFiveAskBidRatio.length,
                       itemBuilder: (context, index) {
                         return Padding(
                           padding: const EdgeInsets.all(3),
@@ -76,16 +77,8 @@ class OrderBookChart extends StatelessWidget {
                               child: BText(
                                   LeftController
                                       .to
-                                      .marketCode[LeftController.to.marketCode
-                                          .indexWhere((element) =>
-                                              element.market ==
-                                              LeftController
-                                                  .to
-                                                  .mongoData
-                                                  .value
-                                                  .accTradeVolume[index]
-                                                  .market)]
-                                      .koreanName,
+                                      .analyzeOrderBook.value.oneToFiveAskBidRatio[index]
+                                      .market,
                                   14),
                             ),
                           ]),

@@ -20,21 +20,13 @@ Model2ndCurrentInfo _$Model2ndCurrentInfoFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Model2ndCurrentInfo {
-  @JsonKey(name: 'market')
   String get market => throw _privateConstructorUsedError;
-  @JsonKey(name: 'trade_price')
   double get tradePrice => throw _privateConstructorUsedError;
-  @JsonKey(name: 'signed_change_price')
   double get signedChangePrice => throw _privateConstructorUsedError;
-  @JsonKey(name: 'signed_change_rate')
   double get signedChangeRate => throw _privateConstructorUsedError;
-  @JsonKey(name: 'acc_trade_price')
   double get accTradePrice => throw _privateConstructorUsedError;
-  @JsonKey(name: 'acc_trade_volume')
   double get accTradeVolume => throw _privateConstructorUsedError;
-  @JsonKey(name: 'standard')
   String get standard => throw _privateConstructorUsedError;
-  @JsonKey(name: 'time')
   DateTime get time => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -49,14 +41,14 @@ abstract class $Model2ndCurrentInfoCopyWith<$Res> {
           Model2ndCurrentInfo value, $Res Function(Model2ndCurrentInfo) then) =
       _$Model2ndCurrentInfoCopyWithImpl<$Res>;
   $Res call(
-      {@JsonKey(name: 'market') String market,
-      @JsonKey(name: 'trade_price') double tradePrice,
-      @JsonKey(name: 'signed_change_price') double signedChangePrice,
-      @JsonKey(name: 'signed_change_rate') double signedChangeRate,
-      @JsonKey(name: 'acc_trade_price') double accTradePrice,
-      @JsonKey(name: 'acc_trade_volume') double accTradeVolume,
-      @JsonKey(name: 'standard') String standard,
-      @JsonKey(name: 'time') DateTime time});
+      {String market,
+      double tradePrice,
+      double signedChangePrice,
+      double signedChangeRate,
+      double accTradePrice,
+      double accTradeVolume,
+      String standard,
+      DateTime time});
 }
 
 /// @nodoc
@@ -124,14 +116,14 @@ abstract class _$$_Model2ndCurrentInfoCopyWith<$Res>
       __$$_Model2ndCurrentInfoCopyWithImpl<$Res>;
   @override
   $Res call(
-      {@JsonKey(name: 'market') String market,
-      @JsonKey(name: 'trade_price') double tradePrice,
-      @JsonKey(name: 'signed_change_price') double signedChangePrice,
-      @JsonKey(name: 'signed_change_rate') double signedChangeRate,
-      @JsonKey(name: 'acc_trade_price') double accTradePrice,
-      @JsonKey(name: 'acc_trade_volume') double accTradeVolume,
-      @JsonKey(name: 'standard') String standard,
-      @JsonKey(name: 'time') DateTime time});
+      {String market,
+      double tradePrice,
+      double signedChangePrice,
+      double signedChangeRate,
+      double accTradePrice,
+      double accTradeVolume,
+      String standard,
+      DateTime time});
 }
 
 /// @nodoc
@@ -197,41 +189,33 @@ class __$$_Model2ndCurrentInfoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_Model2ndCurrentInfo implements _Model2ndCurrentInfo {
   _$_Model2ndCurrentInfo(
-      {@JsonKey(name: 'market') required this.market,
-      @JsonKey(name: 'trade_price') required this.tradePrice,
-      @JsonKey(name: 'signed_change_price') required this.signedChangePrice,
-      @JsonKey(name: 'signed_change_rate') required this.signedChangeRate,
-      @JsonKey(name: 'acc_trade_price') required this.accTradePrice,
-      @JsonKey(name: 'acc_trade_volume') required this.accTradeVolume,
-      @JsonKey(name: 'standard') required this.standard,
-      @JsonKey(name: 'time') required this.time});
+      {required this.market,
+      required this.tradePrice,
+      required this.signedChangePrice,
+      required this.signedChangeRate,
+      required this.accTradePrice,
+      required this.accTradeVolume,
+      required this.standard,
+      required this.time});
 
   factory _$_Model2ndCurrentInfo.fromJson(Map<String, dynamic> json) =>
       _$$_Model2ndCurrentInfoFromJson(json);
 
   @override
-  @JsonKey(name: 'market')
   final String market;
   @override
-  @JsonKey(name: 'trade_price')
   final double tradePrice;
   @override
-  @JsonKey(name: 'signed_change_price')
   final double signedChangePrice;
   @override
-  @JsonKey(name: 'signed_change_rate')
   final double signedChangeRate;
   @override
-  @JsonKey(name: 'acc_trade_price')
   final double accTradePrice;
   @override
-  @JsonKey(name: 'acc_trade_volume')
   final double accTradeVolume;
   @override
-  @JsonKey(name: 'standard')
   final String standard;
   @override
-  @JsonKey(name: 'time')
   final DateTime time;
 
   @override
@@ -288,49 +272,33 @@ class _$_Model2ndCurrentInfo implements _Model2ndCurrentInfo {
 
 abstract class _Model2ndCurrentInfo implements Model2ndCurrentInfo {
   factory _Model2ndCurrentInfo(
-      {@JsonKey(name: 'market')
-          required final String market,
-      @JsonKey(name: 'trade_price')
-          required final double tradePrice,
-      @JsonKey(name: 'signed_change_price')
-          required final double signedChangePrice,
-      @JsonKey(name: 'signed_change_rate')
-          required final double signedChangeRate,
-      @JsonKey(name: 'acc_trade_price')
-          required final double accTradePrice,
-      @JsonKey(name: 'acc_trade_volume')
-          required final double accTradeVolume,
-      @JsonKey(name: 'standard')
-          required final String standard,
-      @JsonKey(name: 'time')
-          required final DateTime time}) = _$_Model2ndCurrentInfo;
+      {required final String market,
+      required final double tradePrice,
+      required final double signedChangePrice,
+      required final double signedChangeRate,
+      required final double accTradePrice,
+      required final double accTradeVolume,
+      required final String standard,
+      required final DateTime time}) = _$_Model2ndCurrentInfo;
 
   factory _Model2ndCurrentInfo.fromJson(Map<String, dynamic> json) =
       _$_Model2ndCurrentInfo.fromJson;
 
   @override
-  @JsonKey(name: 'market')
   String get market;
   @override
-  @JsonKey(name: 'trade_price')
   double get tradePrice;
   @override
-  @JsonKey(name: 'signed_change_price')
   double get signedChangePrice;
   @override
-  @JsonKey(name: 'signed_change_rate')
   double get signedChangeRate;
   @override
-  @JsonKey(name: 'acc_trade_price')
   double get accTradePrice;
   @override
-  @JsonKey(name: 'acc_trade_volume')
   double get accTradeVolume;
   @override
-  @JsonKey(name: 'standard')
   String get standard;
   @override
-  @JsonKey(name: 'time')
   DateTime get time;
   @override
   @JsonKey(ignore: true)
