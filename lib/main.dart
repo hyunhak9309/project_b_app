@@ -3,26 +3,29 @@ import 'package:get/get.dart';
 import 'package:logger/logger.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:project_b/application/resource/theme.dart';
-import 'package:project_b/data/repository/center/order_repository_impl.dart';
-import 'package:project_b/domain/use_case/center/use_case_transaction.dart';
-import 'package:project_b/presentation/center/home.dart';
-import 'package:project_b/presentation/center/home_controller.dart';
-import 'package:project_b/presentation/left/left.dart';
-import 'package:project_b/presentation/left/left_controller.dart';
-import 'package:project_b/presentation/right/right.dart';
-import 'package:project_b/presentation/right/right_controller.dart';
+import 'package:project_b/presentation/core_controller.dart';
+import 'package:project_b/presentation/my_asset/my_asset.dart';
+import 'package:project_b/presentation/info_desk/info_desk.dart';
+import 'package:project_b/presentation/info_desk/info_desk_controller.dart';
+import 'package:project_b/presentation/market/market_controller.dart';
+import 'package:project_b/presentation/market/market.dart';
+import 'package:project_b/presentation/my_asset/my_asset_controller.dart';
+import 'package:project_b/presentation/order_record/order_record.dart';
+import 'package:project_b/presentation/order_record/order_record_controller.dart';
+import 'package:project_b/presentation/trading/manual_trading_list.dart';
+import 'package:project_b/presentation/trading/manual_trading_list_controller.dart';
 import 'application/resource/translation.dart';
 import 'data/data_source/up_bit_server.dart';
 import 'data/data_source/mongo_db.dart';
-import 'data/repository/left/market_repository_impl.dart';
-import 'data/repository/left/mongo_repository_impl.dart';
-import 'data/repository/right/asset_repository_impl.dart';
-import 'data/repository/right/wallet_repository_impl.dart';
-import 'domain/use_case/center/use_case_home.dart';
-import 'domain/use_case/left/use_case_mongo.dart';
-import 'domain/use_case/left/use_case_up_bit.dart';
-import 'domain/use_case/right/use_case_asset.dart';
-import 'domain/use_case/right/use_case_wallet.dart';
+import 'data/repository/up_bit_repository_impl.dart';
+import 'data/repository/mongo_repository_impl.dart';
+import 'domain/use_case/use_case_order_record.dart';
+import 'domain/use_case/use_case_shared_preferences.dart';
+import 'domain/use_case/use_case_market_record.dart';
+import 'domain/use_case/use_case_market.dart';
+import 'domain/use_case/use_case_asset.dart';
+import 'domain/use_case/use_case_transaction.dart';
+import 'domain/use_case/use_case_wallet.dart';
 
 void main() async {
   runApp(const ProjectB());
@@ -39,32 +42,70 @@ class ProjectB extends StatelessWidget {
       theme: ProjectBTheme.themeDark(),
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-          body: Row(children: const [
-        Expanded(flex: 1, child: Left()),
-        Expanded(flex: 4, child: Home()),
-        Expanded(flex: 1, child: Right()),
+          body: Row(children: [
+        Expanded(
+          flex: 5,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Expanded(
+                flex: 1,
+                child: Row(
+                  children: const [
+                    Expanded(flex: 3, child: Market()),
+                    Expanded(flex: 1, child: ManualTradingList()),
+                  ],
+                ),
+              ),
+              Expanded(
+                  flex: 2,
+                  child: Row(
+                    children: const [
+                      Expanded(flex: 3, child: OrderRecord()),
+                      Expanded(flex: 2, child: MyAsset()),
+                    ],
+                  )),
+            ],
+          ),
+        ),
+        const Expanded(flex: 1, child: InfoDesk()),
       ])),
       locale: const Locale('ko', 'KR'),
       translations: TextResource(),
       initialBinding: BindingsBuilder(
         () {
-          Get.lazyPut<HomeController>(() => HomeController(
-            getUseCaseHome: UseCaseHome(),
-              getUseCaseMarket: UseCaseTransaction(
-                  repository: OrderRepositoryImpl(server: UpBitServer()))));
-          Get.lazyPut<RightController>(
-            () => RightController(
+          final server = UpBitServer();
+          final db = MyDB();
+          Get.put(CoreController(getUseCaseSharedPreferences: UseCaseSharedPreferences()));
+
+          Get.lazyPut<ManualTradingListController>(() =>
+              ManualTradingListController());
+
+          Get.lazyPut<MyAssetController>(()=>MyAssetController(
+              getUseCaseRecord:
+              UseCaseOrderRecord(repository: MongoRepositoryImpl(db: db)),
+              getUseCaseWallet: UseCaseWallet(
+                  repository: UpBitRepositoryImpl(server: server))));
+
+          Get.lazyPut<OrderRecordController>(() =>OrderRecordController(
+              getUseCaseRecord:
+              UseCaseOrderRecord(repository: MongoRepositoryImpl(db: db)),
+              getUseCaseTransaction: UseCaseTransaction(
+                  repository: UpBitRepositoryImpl(server: server))));
+
+              Get.lazyPut<InfoDeskController>(
+            () => InfoDeskController(
                 getUseCaseWallet: UseCaseWallet(
-                    repository: WalletRepositoryImpl(server: UpBitServer())),
+                    repository: UpBitRepositoryImpl(server: server)),
                 getUseCaseAsset:
-                    UseCaseAsset(repository: AssetRepositoryImpl(db: MyDB()))),
+                    UseCaseAsset(repository: MongoRepositoryImpl(db:db ))),
           );
-          Get.lazyPut<LeftController>(
-            () => LeftController(
-                getUseCaseUpBit: UseCaseUpBit(
-                    repository: MarketRepositoryImpl(server: UpBitServer())),
-                getUseCaseMongo:
-                    UseCaseMongo(repository: MongoRepositoryImpl(db: MyDB()))),
+          Get.lazyPut<MarketController>(
+            () => MarketController(
+                getUseCaseUpBit: UseCaseMarket(
+                    repository: UpBitRepositoryImpl(server: server)),
+                getUseCaseMarketRecord:
+                    UseCaseMarketRecord(repository: MongoRepositoryImpl(db: db))),
           );
         },
       ),
